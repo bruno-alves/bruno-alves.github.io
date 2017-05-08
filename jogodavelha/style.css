@@ -1,0 +1,22 @@
+.mainDiv { width: 606px; height: 606px; }
+.divChild.border-all { border: 2px solid black; }
+.divChild.border-left-right { border-left: 2px solid black; border-right: 2px solid black; }
+.divChild.border-top-bottom { border-top: 2px solid black; border-bottom: 2px solid black; }
+.divChild { 
+    width: 200px;
+     height: 200px; 
+     float: left; 
+     text-align: center;
+     vertical-align: middle;
+     font-family: "Arial";
+     font-size: 100px;
+     line-height: 200px;  
+     user-select: none;
+}
+
+
+
+
+
+
+
