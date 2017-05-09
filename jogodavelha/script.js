@@ -1,7 +1,6 @@
 (function() {
     var start = true;               // Variavel que controla quem começa a jogar, true indica o X, false indica O
-    var matriz = new Array();
-    var old = 0;
+    var matriz = [];
 
     // Criando colunas da matriz
     for (var x = 0; x < 3; x++)
@@ -16,70 +15,36 @@
         for (var c = 0; c < 3; c++) {
             var div = document.createElement('div');
 
-            var row = document.createAttribute('row');
-            var column = document.createAttribute('column'); 
+            div.c = c;
+            div.r = r;
 
-            row.value = r;
-            column.value = c;   
+            div.onclick = function () {
+                this.innerHTML = start ? 'X' : 'O';
+                this.style.color = start ? 'green' : 'blue';
+                this.onclick = null;
+                matriz[this.r][this.c] = this.innerHTML;
 
-            div.setAttributeNode(row);
-            div.setAttributeNode(column);
+                var velha = true;
+                document.querySelectorAll(".mainDiv div").forEach(function(div) { 
+                    if (!div.innerHTML)
+                        velha = false;
+                });
+
+                if (checkWinner(start ? 'X' : 'O')) {
+                    setTimeout(function() { alert(start ? 'Jogador X ganhou!' : 'Jogador O ganhou!'); }, 10);
+                    document.querySelectorAll('.mainDiv div').forEach(function(d) { d.onclick = null; });
+                } else if (velha)
+                    setTimeout(function() {
+                        alert('Velha !!!');
+                    }, 10);
+                else start = !start;
+            };
             
-            mainDiv.appendChild(switchClass(r, c, div));
+            mainDiv.appendChild(div);
         }
-
-    // Determina a classe de cade div filha
-    function switchClass(r, c, div) {
-        if ((r == 0 && c == 1) || (r == 2 && c == 1))
-            div.className = 'divChild border-left-right';
-        else if ((r == 1 && c == 0) || (r == 1 && c == 2))
-            div.className = 'divChild border-top-bottom';
-        else if (r == 1 && c == 1)
-            div.className = 'divChild border-all'
-        else
-            div.className = 'divChild';
-
-        // Atribuindo evento de click
-        div.onclick = function() {
-            clickDiv(this);
-        };
-
-        return div;
-    }
 
     // Criando os elementos no body da pagina
     document.getElementsByTagName('body')[0].appendChild(mainDiv);
-
-    // Função de click
-    function clickDiv(element) {
-        element.innerHTML = start ? 'X' : 'O';
-        element.style.color = start ? 'green' : 'blue';
-        element.onclick = null;
-        matriz[element.getAttribute('row')][element.getAttribute('column')] = element.innerHTML;
-
-        if (checkWinner(start ? 'X' : 'O') != undefined) {
-            setTimeout(function() {
-                alert(start ? 'Jogador X ganhou!' : 'Jogador O ganhou!');
-            }, 10);
-            removeClick();
-        } 
-        else {
-            if (old == 8)
-                setTimeout(function() {
-                    alert('Velha !!!');
-                }, 10);
-            else {
-                start = !start;
-                old++;
-            } 
-        }
-    }
-
-    // Função que remove o click caso algum jogador ganhe
-    function removeClick() {
-        for (var x = 0; x < 9; x++)
-            document.getElementsByClassName('divChild')[x].onclick = null;
-    }
 
     // Função que verifica se alguem ganho
     function checkWinner(player) {
@@ -88,8 +53,7 @@
 
         // Verifica de cima para baixo e da esquerda para direta se algum jogador ganhou
         for (var r = 0; r < 3; r++) {
-            if (winnerRow != undefined || winnerColumn != undefined)
-                break;
+            if (winnerRow || winnerColumn) break;
 
             for (var c = 0; c < 3; c++) {
                 if (winnerRow != 'S')
@@ -114,13 +78,11 @@
         // Diagonal principal
         for (var x = 0; x < 3; x++) {
             winnerMainDiagonal = matriz[x][x] == player ? winnerDiagonal = player : winnerDiagonal = undefined;
-            if (winnerDiagonal == undefined)
-                break;
+            if (!winnerDiagonal) break;
         }
 
-        if (winnerMainDiagonal == player)
-            return player;  
-
+        if (winnerMainDiagonal == player) return player;  
+            
         // Diagonal secundaria
         var winnerSecondaryDiagonal; 
         var counter = 2;
@@ -129,11 +91,9 @@
             winnerSecondaryDiagonal = matriz[x][counter] == player ? winnerSecondaryDiagonal = player : winnerSecondaryDiagonal = undefined;
             counter--;
 
-            if (winnerSecondaryDiagonal == undefined)
-                break;            
+            if (!winnerSecondaryDiagonal) break;    
         }
 
-        if (winnerSecondaryDiagonal == player)
-            return player;
+        if (winnerSecondaryDiagonal == player) return player;    
     } 
 }())

@@ -1,29 +1,21 @@
 .mainDiv { 
-    position:fixed;
-    top: 50%;
-    left: 50%;
-    width: 606px; 
+    max-width: 606px; 
+    width: 100%;
     height: 606px; 
-    margin-top: -303px;
-    margin-left: -303px;
+    margin: 0 auto;
 }
-.divChild.border-all { border: 2px solid black; }
-.divChild.border-left-right { border-left: 2px solid black; border-right: 2px solid black; }
-.divChild.border-top-bottom { border-top: 2px solid black; border-bottom: 2px solid black; }
-.divChild { 
-    width: 200px;
-     height: 200px; 
-     float: left; 
-     text-align: center;
-     vertical-align: middle;
-     font-family: "Arial";
-     font-size: 100px;
-     line-height: 200px;  
-     user-select: none;
+.mainDiv div { border-right: 2px solid black; border-bottom: 2px solid black; }
+.mainDiv div:nth-child(3), .mainDiv div:nth-child(6), .mainDiv div:nth-child(9) { border-right: 0; }
+.mainDiv div:nth-child(7), .mainDiv div:nth-child(8), .mainDiv div:nth-child(9) { border-bottom: 0; }
+.mainDiv div { 
+    width: 33.3333%;
+    height: 33.3333%; 
+    box-sizing: border-box;
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    font-family: "Arial";
+    font-size: 100px;
+    line-height: 200px;  
+    user-select: none;
 }
-
-
-
-
-
-
