@@ -1,7 +1,7 @@
 (function() {
     var start = true;               // Variavel que controla quem começa a jogar, true indica o X, false indica O
     var matriz = [];
-
+    
     // Criando colunas da matriz
     for (var x = 0; x < 3; x++)
         matriz[x] = new Array(2);
@@ -14,7 +14,6 @@
     for (var r = 0; r < 3; r++)
         for (var c = 0; c < 3; c++) {
             var div = document.createElement('div');
-
             div.c = c;
             div.r = r;
 
@@ -24,16 +23,16 @@
                 this.onclick = null;
                 matriz[this.r][this.c] = this.innerHTML;
 
-                var velha = true;
+                var old = true;
                 document.querySelectorAll(".mainDiv div").forEach(function(div) { 
                     if (!div.innerHTML)
-                        velha = false;
+                        old = false;
                 });
 
                 if (checkWinner(start ? 'X' : 'O')) {
                     setTimeout(function() { alert(start ? 'Jogador X ganhou!' : 'Jogador O ganhou!'); }, 10);
                     document.querySelectorAll('.mainDiv div').forEach(function(d) { d.onclick = null; });
-                } else if (velha)
+                } else if (old)
                     setTimeout(function() {
                         alert('Velha !!!');
                     }, 10);
@@ -53,7 +52,8 @@
 
         // Verifica de cima para baixo e da esquerda para direta se algum jogador ganhou
         for (var r = 0; r < 3; r++) {
-            if (winnerRow || winnerColumn) break;
+            if (winnerRow || winnerColumn) 
+                break;
 
             for (var c = 0; c < 3; c++) {
                 if (winnerRow != 'S')
@@ -69,7 +69,7 @@
             }
         }
 
-        if (winnerRow == player || winnerColumn == player)
+        if (winnerRow == player || winnerColumn == player) 
             return player;
         
         // Verifica nas diagonais se algum jogador ganhou
@@ -81,7 +81,8 @@
             if (!winnerDiagonal) break;
         }
 
-        if (winnerMainDiagonal == player) return player;  
+        if (winnerMainDiagonal == player) 
+            return player;  
             
         // Diagonal secundaria
         var winnerSecondaryDiagonal; 
@@ -91,9 +92,11 @@
             winnerSecondaryDiagonal = matriz[x][counter] == player ? winnerSecondaryDiagonal = player : winnerSecondaryDiagonal = undefined;
             counter--;
 
-            if (!winnerSecondaryDiagonal) break;    
+            if (!winnerSecondaryDiagonal) 
+                break;    
         }
 
-        if (winnerSecondaryDiagonal == player) return player;    
+        if (winnerSecondaryDiagonal == player) 
+            return player;    
     } 
 }())
