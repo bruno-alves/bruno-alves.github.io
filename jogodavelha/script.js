@@ -1,5 +1,5 @@
 (function() {
-    var start = true;               // Variavel que controla quem começa a jogar, true indica o X, false indica O
+    var start = true;    // Variavel que controla quem começa a jogar, true indica o X, false indica O
     var matriz = [];
     
     // Criando colunas da matriz
@@ -30,7 +30,9 @@
                 });
 
                 if (checkWinner(start ? 'X' : 'O')) {
-                    setTimeout(function() { alert(start ? 'Jogador X ganhou!' : 'Jogador O ganhou!'); }, 10);
+                    setTimeout(function() { 
+                        alert(start ? 'Jogador X ganhou!' : 'Jogador O ganhou!'); 
+                    }, 10);
                     document.querySelectorAll('.mainDiv div').forEach(function(d) { d.onclick = null; });
                 } else if (old)
                     setTimeout(function() {
@@ -57,10 +59,10 @@
 
             for (var c = 0; c < 3; c++) {
                 if (winnerRow != 'S')
-                    winnerRow = matriz[r][c] == player ? winnerRow = player : winnerRow = 'S'; 
+                    winnerRow = matriz[r][c] == player ? player : 'S'; 
 
                 if (winnerColumn != 'S')
-                    winnerColumn = matriz[c][r] == player ? winnerColumn = player : winnerColumn = 'S';
+                    winnerColumn = matriz[c][r] == player ? player : 'S';
 
                 if (winnerRow == 'S' && winnerColumn == 'S') {
                     winnerRow = winnerColumn = undefined;
@@ -73,30 +75,20 @@
             return player;
         
         // Verifica nas diagonais se algum jogador ganhou
-        var winnerMainDiagonal;
-
-        // Diagonal principal
-        for (var x = 0; x < 3; x++) {
-            winnerMainDiagonal = matriz[x][x] == player ? winnerDiagonal = player : winnerDiagonal = undefined;
-            if (!winnerDiagonal) break;
-        }
-
-        if (winnerMainDiagonal == player) 
-            return player;  
-            
-        // Diagonal secundaria
-        var winnerSecondaryDiagonal; 
+        var mainDiagonal, secondaryDiagonal;
         var counter = 2;
 
+        // Diagonal principal e secundaria
         for (var x = 0; x < 3; x++) {
-            winnerSecondaryDiagonal = matriz[x][counter] == player ? winnerSecondaryDiagonal = player : winnerSecondaryDiagonal = undefined;
+            mainDiagonal = matriz[x][x] == player ? player : undefined;
+            secondaryDiagonal = matriz[x][counter] == player ? player : undefined;
             counter--;
 
-            if (!winnerSecondaryDiagonal) 
-                break;    
+            if (!mainDiagonal && !secondaryDiagonal) 
+                break;
         }
 
-        if (winnerSecondaryDiagonal == player) 
-            return player;    
+        if (mainDiagonal == player || secondaryDiagonal == player) 
+            return player;  
     } 
 }())
