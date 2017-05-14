@@ -77,15 +77,21 @@
         // Verifica nas diagonais se algum jogador ganhou
         var mainDiagonal, secondaryDiagonal;
         var counter = 2;
-
+        
         // Diagonal principal e secundaria
         for (var x = 0; x < 3; x++) {
-            mainDiagonal = matriz[x][x] == player ? player : undefined;
-            secondaryDiagonal = matriz[x][counter] == player ? player : undefined;
+            if (mainDiagonal != 'S')
+                mainDiagonal = matriz[x][x] == player ? player : 'S';
+
+            if (secondaryDiagonal != 'S')
+                secondaryDiagonal = matriz[x][counter] == player ? player : 'S';
+
             counter--;
 
-            if (!mainDiagonal && !secondaryDiagonal) 
+            if (mainDiagonal == 'S' && secondaryDiagonal == 'S') {
+                mainDiagonal = secondaryDiagonal = undefined;  
                 break;
+            }
         }
 
         if (mainDiagonal == player || secondaryDiagonal == player) 
