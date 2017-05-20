@@ -47,51 +47,39 @@
     // Criando os elementos no body da pagina
     document.getElementsByTagName('body')[0].appendChild(mainDiv);
 
-    // Função que verifica se alguem ganho
+    // Função que verifica se o jogador ganhou
     function checkWinner(player) {
-        var winnerRow;
-        var winnerColumn;
+        var winnerRow, winnerColumn;
 
-        // Verifica de cima para baixo e da esquerda para direta se algum jogador ganhou
+        // Verifica na horizontal e vertical se o jogador ganhou
         for (var r = 0; r < 3; r++) {
+            winnerRow = winnerColumn = true;
+            for (var c = 0; c < 3 && (winnerRow || winnerColumn); c++) {
+                if (winnerRow)
+                    winnerRow = matriz[r][c] == player ? player : false; 
+
+                if (winnerColumn)
+                    winnerColumn = matriz[c][r] == player ? player : false;
+            }
             if (winnerRow || winnerColumn) 
                 break;
-
-            for (var c = 0; c < 3; c++) {
-                if (winnerRow != 'S')
-                    winnerRow = matriz[r][c] == player ? player : 'S'; 
-
-                if (winnerColumn != 'S')
-                    winnerColumn = matriz[c][r] == player ? player : 'S';
-
-                if (winnerRow == 'S' && winnerColumn == 'S') {
-                    winnerRow = winnerColumn = undefined;
-                    break;
-                }
-            }
         }
 
         if (winnerRow == player || winnerColumn == player) 
             return player;
         
-        // Verifica nas diagonais se algum jogador ganhou
-        var mainDiagonal, secondaryDiagonal;
+        // Verifica na diagonal principal e secundaria se o jogador ganhou
+        var mainDiagonal = secondaryDiagonal = true;
         var counter = 2;
         
-        // Diagonal principal e secundaria
-        for (var x = 0; x < 3; x++) {
-            if (mainDiagonal != 'S')
-                mainDiagonal = matriz[x][x] == player ? player : 'S';
+        for (var x = 0; x < 3 && (mainDiagonal || secondaryDiagonal); x++) {
+            if (mainDiagonal)
+                mainDiagonal = matriz[x][x] == player ? player : false;
 
-            if (secondaryDiagonal != 'S')
-                secondaryDiagonal = matriz[x][counter] == player ? player : 'S';
+            if (secondaryDiagonal)
+                secondaryDiagonal = matriz[x][counter] == player ? player : false;
 
             counter--;
-
-            if (mainDiagonal == 'S' && secondaryDiagonal == 'S') {
-                mainDiagonal = secondaryDiagonal = undefined;  
-                break;
-            }
         }
 
         if (mainDiagonal == player || secondaryDiagonal == player) 
