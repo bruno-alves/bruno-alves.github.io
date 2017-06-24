@@ -7,8 +7,8 @@
         matriz[x] = new Array(2);
 
     // Criando div principal
-    var mainDiv = document.createElement('div');
-    mainDiv.className = 'mainDiv';
+    var divGame = document.createElement('div');
+    divGame.className = 'divGame';
 
     // Criando divs filhas e definindo a posição de cada uma na matriz
     for (var r = 0; r < 3; r++)
@@ -24,7 +24,7 @@
                 matriz[this.r][this.c] = this.innerHTML;
 
                 var old = true;
-                document.querySelectorAll(".mainDiv div").forEach(function(div) { 
+                document.querySelectorAll(".divGame div").forEach(function(div) { 
                     if (!div.innerHTML)
                         old = false;
                 });
@@ -33,7 +33,7 @@
                     setTimeout(function() { 
                         alert(start ? 'Jogador X ganhou!' : 'Jogador O ganhou!'); 
                     }, 10);
-                    document.querySelectorAll('.mainDiv div').forEach(function(d) { d.onclick = null; });
+                    document.querySelectorAll('.divGame div').forEach(function(d) { d.onclick = null; });
                 } else if (old)
                     setTimeout(function() {
                         alert('Velha !!!');
@@ -41,11 +41,14 @@
                 else start = !start;
             };
             
-            mainDiv.appendChild(div);
+            divGame.appendChild(div);
         }
 
     // Criando os elementos no body da pagina
-    document.getElementsByTagName('body')[0].appendChild(mainDiv);
+    document.getElementsByTagName('div')[0].appendChild(divGame);
+    var div = document.createElement('div');
+    div.className = 'divInfo';
+    document.getElementsByTagName('div')[0].appendChild(div);
 
     // Função que verifica se o jogador ganhou
     function checkWinner(player) {
