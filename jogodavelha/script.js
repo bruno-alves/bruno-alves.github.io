@@ -46,9 +46,6 @@
 
     // Criando os elementos no body da pagina
     document.getElementsByTagName('div')[0].appendChild(divGame);
-    var div = document.createElement('div');
-    div.className = 'divInfo';
-    document.getElementsByTagName('div')[0].appendChild(div);
 
     // Função que verifica se o jogador ganhou
     function checkWinner(player) {

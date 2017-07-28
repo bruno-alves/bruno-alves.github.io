@@ -2,14 +2,15 @@
     var snake = new Array();
     var speedSnake = 500;
     var direction = newDirection = 'D';
-    var maxTr = maxTd = 15; 
+    var maxTr = 15;
+	var maxTd = 20; 
     var time;
 
     //Montando tabela do jogo
     for (var l = 1; l <= 15; l++){
 
         var tds = [];
-        for (var c = 1; c <= 15; c++) 
+        for (var c = 1; c <= 20; c++) 
             tds.push($('<td>'));
 
         $('#tableGame').append($('<tr>', {html: tds}))
