@@ -1,0 +1,109 @@
+﻿@model IEnumerable<Cliente.Web.ViewModel.ClienteViewModel>
+
+<style>
+    legend {
+        font-family: calibri;
+        font-size: 17px;
+    }
+
+    table {
+        width: 765px;
+        margin-top: 5px;
+        border-collapse: collapse;
+    }
+
+        table tbody tr:nth-child(odd) {
+            background-color: rgb(198, 210, 236);
+        }
+
+    td {
+        font-family: calibri;
+        border: 1px solid black;
+    }
+
+    img {
+        width: 25px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        cursor: pointer;
+    }
+</style>
+
+<fieldset>
+    <legend>Resultados da Pesquisa</legend>
+    <table>
+        <thead>
+            <tr>
+                <td>Nome</td>
+                <td style="text-align: center;">CPF/CNPJ</td>
+                <td style="text-align: center;">Idade</td>
+                <td style="text-align: center;">Sexo</td>
+                <td style="width: 30px;"></td>
+                <td style="width: 30px;"></td>
+            </tr>
+        </thead>
+        <tbody>
+            @if (@Model != null && @Model.Any())
+            {
+                foreach (var cliente in @Model)
+                {
+                    <tr>
+                        <td>@cliente.Nome</td>
+                        <td style="text-align: center;">@cliente.CpfCnpj</td>
+                        <td style="text-align: center;">@cliente.Idade</td>
+                        <td style="text-align: center;">@cliente.Sexo</td>
+                        <td title="Editar"><img onclick="Editar(@cliente.Sequencial)" src="../../Images/Editar.png" /></td>
+                        <td title="Excluir"><img onclick="Deletar(@cliente.Sequencial)" src="../../Images/excluir.png" /></td>
+                    </tr>
+                }
+            }
+            else
+            {
+                <tr>
+                    <td style="text-align: center" colspan="6">Nenhum registro encontrado...</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <div class="buttons" style="margin-top: 10px;">
+        <input id="btnNovo" type="button" value="Novo" />
+        <input id="btnFechar" type="button" value="Fechar" />
+    </div>
+</fieldset>
+
+<script>
+
+    $("#btnFechar").click(function () {
+        $("#gridResultados").slideUp(function() {
+            $("#filtrosPesquisa, #divButtons").fadeIn(100);
+        });
+    });
+
+    $("#btnNovo").click(function() {
+        Editar(null);
+    });
+
+    function Editar(sequencial) {
+        $.get('@Url.Action("GetDadosCliente", "Cliente")', { sequencial: sequencial }).done(function (data) {
+            $("#gridResultados").slideUp(function() {
+                $("#sessaoCadastroEdicao").html(data).fadeIn(100);
+            });
+        }).fail(function (xhr) {
+            alert(xhr.responseText);
+        });
+    }
+
+    function Deletar(sequencial) {
+        if (confirm("Confirma Exclusão?")) {
+            $("#gridResultados").slideUp(function() {
+                $.get('@Url.Action("Delete", "Cliente")', { sequencial: sequencial }).done(function () {
+                    $("#btnPesquisar").click();
+                }).fail(function (data) {
+                    alert(data);
+                });
+            });
+        }
+    }
+
+</script>
