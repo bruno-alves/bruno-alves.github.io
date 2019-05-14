@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Choose your game!</title>
+        <link rel="stylesheet" href="styles/index.css">
+        <script src="scripts/jquery-3.2.1.min.js"> </script>
+    </head>
+    <body>
+        <div id="mainDiv" class="transform">
+            <div id="titleCard">
+                <label class="red">CHOOSE YOUR GAME!</label>
+            </div>
+            <div id="divGameCard">
+                <div class="gameCard backgroundGreen">
+                    <div class="divTitleGame">
+                        <label class="blue">SNAKE</label>
+                    </div>
+                    <div class="divPlayButton">
+                        <button name="snake" class="playButton blue backgroundLightGreen" onclick="redirect('snake.html')">PLAY!</button>
+                    </div>
+                </div>
+                <div class="gameCard backgroundYellow">
+                    <div class="divTitleGame">
+                        <label class="blue">HASH</label>
+                    </div>
+                    <div class="divPlayButton">
+                        <button name="hash" class="playButton blue backgroundLightYellow" onclick="redirect('hash.html')">PLAY!</button>
+                    </div>
+                </div>
+                <div class="gameCard backgroundOrange">
+                    <div class="divTitleGame">
+                        <label class="blue">MINIFIELD</label>
+                    </div>
+                    <div class="divPlayButton">
+                        <button name="minifield" class="playButton blue backgroundLightOrange" onclick="redirect('minifield.html')">PLAY!</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+
+    redirect = url => { 
+        if (url == 'minifield.html') {
+            alert('coming son!');
+            return;
+        }
+        
+        $('#mainDiv').toggleClass('transform-active');
+        setTimeout(function () { 
+            window.location.href = url; 
+        }, 1000);  
+    };
+
+</script>

@@ -1,3 +1,16 @@
+.transform {
+    -webkit-transition: all 1s ease;  
+    -moz-transition: all 1s ease;  
+    -o-transition: all 1s ease;  
+    -ms-transition: all 1s ease;  
+    transition: all 1s ease;
+    transform: scale(0)
+}
+
+.transform-active {
+   transform: scale(1); 
+}
+
 .divMain {
     width: 610px;
     height: 600px;

@@ -1,4 +1,8 @@
 (function() {
+    setTimeout(function(){
+        $('body').toggleClass('transform-active');
+    }, 10);
+
     var snake = new Array();
     var speedSnake = 500;
     var direction = newDirection = 'D';

@@ -1,4 +1,8 @@
 (function() {
+    setTimeout(function () { 
+        document.getElementById('divMain').classList.toggle('transform-active');
+    }, 1);  
+
     var start = true;    // Variavel que controla quem começa a jogar, true indica o X, false indica O
     var matriz = [];
     
