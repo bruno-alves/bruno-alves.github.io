@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>MiniField</title>
+        <link rel="stylesheet" href="styles/minifield.css">
+        <script src="scripts\jquery-3.2.1.min.js"></script>
+    </head>
+
+    <body class="transform">
+        <div id="container">
+            <table id="field" oncontextmenu="return false;"></table>
+        </div>
+    </body>
+</html>
+<script src="scripts/minifield.js"></script>
+<script>
+
+    minifield.init({
+        length: 15,
+        percentBombs: 20
+    });
+
+</script>

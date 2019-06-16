@@ -1,0 +1,50 @@
+.transform {
+    -webkit-transition: all 1s ease;  
+    -moz-transition: all 1s ease;  
+    -o-transition: all 1s ease;  
+    -ms-transition: all 1s ease;  
+    transition: all 1s ease;
+    transform: scale(0)
+}
+
+.transform-active { transform: scale(1); }
+html, body {height: 100%;}
+table { border-collapse: collapse; }
+table tr td:not([data-open]) { cursor: pointer; }
+table tr td:not([data-open]):not([data-mark]) { background-image: linear-gradient(#64B5F6, #90CAF9); }
+table tr td:hover:not([data-open]):not([data-mark]) { background: #0000ffad; }
+
+.bomb {  
+    background-image: url("../images/bomb.jpg"); 
+    background-size: 50px 50px;
+    background-repeat: no-repeat;
+    background-color: transparent;
+}
+
+table tr td {
+    border: 1px solid black;
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-family: calibri;
+    font-weight: bold;
+    font-size: 24px;
+    user-select: none;  
+}
+
+#container { 
+    display: flex; 
+    height: 100%;
+    justify-content: center;    
+    align-items: center;
+}
+
+.markBomb { background-color: #F44336; }
+.one { color: green; }
+.two { color: orange; }
+.three { color: blue; }
+.for { color: purple; }
+.five { color: black; }
+.six { color: violet; }
+.seven { color: yellow; }
+.eight { color: red; }

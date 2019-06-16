@@ -43,11 +43,6 @@
 <script>
 
     redirect = url => { 
-        if (url == 'minifield.html') {
-            alert('coming son!');
-            return;
-        }
-        
         $('#mainDiv').toggleClass('transform-active');
         setTimeout(function () { 
             window.location.href = url; 
