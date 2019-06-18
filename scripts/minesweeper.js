@@ -1,4 +1,4 @@
-var minifield = (function(){
+var minesweeper = (function(){
     setTimeout(function(){
         $('body').toggleClass('transform-active');
     }, 10);
