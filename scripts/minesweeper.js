@@ -45,9 +45,7 @@ var minesweeper = (function(){
 
             if (td.isBomb) {
                 $(this).toggleClass('bomb');
-
                 $('#field tr td').prop('mouseup', null).off('mouseup');
-                setTimeout(function() { alert('You lost!') }, 300);
                 return;
             }
 
