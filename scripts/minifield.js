@@ -17,7 +17,7 @@ var minifield = (function(){
         createBombs();
         createNumbers();
 
-        // Evento de Click nas tds
+        // Evento de click nas tds
         $('#field tr td').on('mouseup', function(event) {
 
             // Botão direito
@@ -39,14 +39,24 @@ var minifield = (function(){
             $(this).prop('mouseup', null).off('mouseup');
             $(this).attr('data-open', '');
 
-            var td = config.field[$(this).attr('x')][$(this).attr('y')];
+            var x = +$(this).attr('x');
+            var y = +$(this).attr('y');
+            var td = config.field[x][y];
 
             if (td.isBomb) {
                 $(this).toggleClass('bomb');
 
-                setTimeout(function() { alert('You lost!') }, 100);
                 $('#field tr td').prop('mouseup', null).off('mouseup');
+                setTimeout(function() { alert('You lost!') }, 300);
                 return;
+            }
+
+            // Espandindo tds
+            if (!td.number) {
+                around(x, y).forEach(function(item) {
+                    if (item != undefined)
+                        item.td.trigger('mouseup');;
+                })
             }
 
             $(this).html(td.number);
@@ -115,7 +125,7 @@ var minifield = (function(){
         var newNumber = +td.number + 1;
         td.number = newNumber;
     }
-
+    
     around = (x, y) => {
         var arround = [];
         var fieldBoundary = config.length - 1;

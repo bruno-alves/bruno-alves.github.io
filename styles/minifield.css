@@ -8,7 +8,7 @@
 }
 
 .transform-active { transform: scale(1); }
-html, body {height: 100%;}
+html, body {height: 100%; margin: 0}
 table { border-collapse: collapse; }
 table tr td:not([data-open]) { cursor: pointer; }
 table tr td:not([data-open]):not([data-mark]) { background-image: linear-gradient(#64B5F6, #90CAF9); }
