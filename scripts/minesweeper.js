@@ -14,12 +14,15 @@ var minesweeper = (function(){
     // Ajuda ao jogador (marcar em volta da TD)
 
     $(document).on('keyup', function() {
-        $('#field tr td[class="help"]').toggleClass('help');
+        $('#field tr td.help').removeClass('help');
     }).on('keydown', function (event) {
+        $('#field tr td.help').removeClass('help');
         event.preventDefault();
         if (event.which == 18) {
             var td = $('#field tr td:hover');
-            if (td.length && altPress) around(+td.attr('x'), +td.attr('y')).forEach(function(x) { if (x) x.td.toggleClass('help'); });
+            if (td.length) {
+                around(+td.attr('x'), +td.attr('y')).forEach(function(x) { if (x) x.td.addClass('help'); });
+            } 
         }
     });
  
