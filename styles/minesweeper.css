@@ -39,6 +39,7 @@ table tr td {
     align-items: center;
 }
 
+.help {background: green !important;}
 .markBomb { background-color: #F44336; }
 .one { color: green; }
 .two { color: orange; }

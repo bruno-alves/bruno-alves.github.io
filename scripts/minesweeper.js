@@ -3,12 +3,26 @@ var minesweeper = (function(){
         $('body').toggleClass('transform-active');
     }, 10);
 
+   
+
     var config = {
         field: '',          // Matriz que representa o campo do jogo
         length: '',         // Tamanho do campo do jogo (Exemplo: 15x15)
         percentBombs: ''    // Percentual de bombas sobre o tamanho do campo do jogo
     }
 
+    // Ajuda ao jogador (marcar em volta da TD)
+
+    $(document).on('keyup', function() {
+        $('#field tr td[class="help"]').toggleClass('help');
+    }).on('keydown', function (event) {
+        event.preventDefault();
+        if (event.which == 18) {
+            var td = $('#field tr td:hover');
+            if (td.length && altPress) around(+td.attr('x'), +td.attr('y')).forEach(function(x) { if (x) x.td.toggleClass('help'); });
+        }
+    });
+ 
     var init = $config => {
         config = $config;
        
@@ -52,7 +66,7 @@ var minesweeper = (function(){
             // Espandindo tds
             if (!td.number) {
                 around(x, y).forEach(function(item) {
-                    if (item != undefined)
+                    if (item)
                         item.td.trigger('mouseup');;
                 })
             }
@@ -68,7 +82,7 @@ var minesweeper = (function(){
                 case 7: $(this).toggleClass('seven'); break;
                 case 8: $(this).toggleClass('eight'); break;
             }
-        }); 
+        });
     }
 
     // Criando campo de jogo
