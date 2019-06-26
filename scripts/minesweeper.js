@@ -3,27 +3,17 @@ var minesweeper = (function(){
         $('body').toggleClass('transform-active');
     }, 10);
 
-   
-
     var config = {
-        field: '',          // Matriz que representa o campo do jogo
+        field: [],          // Matriz que representa o campo do jogo
         length: '',         // Tamanho do campo do jogo (Exemplo: 15x15)
         percentBombs: ''    // Percentual de bombas sobre o tamanho do campo do jogo
-    }
+    };
 
     // Ajuda ao jogador (marcar em volta da TD)
-
-    $(document).on('keyup', function() {
-        $('#field tr td.help').removeClass('help');
-    }).on('keydown', function (event) {
-        $('#field tr td.help').removeClass('help');
-        event.preventDefault();
-        if (event.which == 18) {
-            var td = $('#field tr td:hover');
-            if (td.length) {
-                around(+td.attr('x'), +td.attr('y')).forEach(function(x) { if (x) x.td.addClass('help'); });
-            } 
-        }
+    $(document).on('keyup keydown mousemove', function(event) {
+        var td = $('#field tr td:hover');
+        if (td.length)
+            help(td, event.ctrlKey); 
     });
  
     var init = $config => {
@@ -36,55 +26,39 @@ var minesweeper = (function(){
 
         // Evento de click nas tds
         $('#field tr td').on('mouseup', function(event) {
-
+            var td = $(this);
             // Botão direito
             if (event.which == 3) {
-                if ($(this).attr('data-mark')) {
-                    $(this).removeAttr('data-mark');
-                    $(this).toggleClass('markBomb');
-                    return;
-                }
+                if (td.attr('data-mark'))
+                    return td.removeAttr('data-mark').toggleClass('markBomb');
 
-                $(this).attr('data-mark', '1');
-                $(this).toggleClass('markBomb');
-                return;
+                return td.attr('data-mark', '1').toggleClass('markBomb');
             }
 
-            if ($(this).attr('data-mark'))
+            if (td.attr('data-mark'))
                 return; 
 
-            $(this).prop('mouseup', null).off('mouseup');
-            $(this).attr('data-open', '');
+            td.attr('data-open', '').off('mouseup');
 
-            var x = +$(this).attr('x');
-            var y = +$(this).attr('y');
-            var td = config.field[x][y];
+            var x = +td.attr('x'),
+                y = +td.attr('y'),
+                field = config.field[x][y];
 
-            if (td.isBomb) {
-                $(this).toggleClass('bomb');
-                $('#field tr td').prop('mouseup', null).off('mouseup');
+            if (field.isBomb) {
+                td.toggleClass('bomb');
+                $('#field tr td').off('mouseup');
                 return;
             }
 
             // Espandindo tds
-            if (!td.number) {
+            if (!field.number) {
                 around(x, y).forEach(function(item) {
                     if (item)
                         item.td.trigger('mouseup');;
                 })
             }
 
-            $(this).html(td.number);
-            switch (td.number) {
-                case 1: $(this).toggleClass('one'); break;
-                case 2: $(this).toggleClass('two'); break;
-                case 3: $(this).toggleClass('three'); break;
-                case 4: $(this).toggleClass('for'); break;
-                case 5: $(this).toggleClass('five'); break;
-                case 6: $(this).toggleClass('six'); break;
-                case 7: $(this).toggleClass('seven'); break;
-                case 8: $(this).toggleClass('eight'); break;
-            }
+            td.html(field.number).addClass('color' + field.number);
         });
     }
 
@@ -164,7 +138,15 @@ var minesweeper = (function(){
         return arround;
     }
 
+    help = (td, ctrlPress) => {
+        $("*[class*='border'").removeClass("border0 border1 border2 border3 border4 border5 border6 border7");
+        if (ctrlPress)
+            around(+td.attr('x'), +td.attr('y')).forEach(function(x, i) { 
+                if (x) x.td.addClass('border' + i);
+            });
+    }
+
     return {
         init: init,
-    }
-})()
+    };
+})();

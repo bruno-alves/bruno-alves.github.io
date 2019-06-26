@@ -39,13 +39,21 @@ table tr td {
     align-items: center;
 }
 
-.help {background: green !important;}
 .markBomb { background-color: #F44336; }
-.one { color: green; }
-.two { color: orange; }
-.three { color: blue; }
-.for { color: purple; }
-.five { color: black; }
-.six { color: violet; }
-.seven { color: yellow; }
-.eight { color: red; }
+.color1 { color: green; }
+.color2 { color: orange; }
+.color3 { color: blue; }
+.color4 { color: purple; }
+.color5 { color: black; }
+.color6 { color: violet; }
+.color7 { color: yellow; }
+.color8 { color: red; }
+
+.border0 { box-shadow: black inset 3px 0px 0px 0px; }
+.border1 { box-shadow: black inset -3px 0px 0px 0px; }
+.border2 { box-shadow: black inset 0px 3px 0px 0px; }
+.border3 { box-shadow: black inset 0px -3px 0px 0px; }
+.border4 { box-shadow: black inset 3px 3px 0px 0px; }
+.border5 { box-shadow: black inset -3px -3px 0px 0px; }
+.border6 { box-shadow: black inset -3px 3px 0px 0px; }
+.border7 { box-shadow: black inset 3px -3px 0px 0px; }
