@@ -16,15 +16,15 @@ table tr td:hover:not([data-open]):not([data-mark]) { background: #0000ffad; }
 
 .bomb {  
     background-image: url("../images/bomb.jpg"); 
-    background-size: 50px 50px;
+    background-size: 45px 45px;
     background-repeat: no-repeat;
     background-color: transparent;
 }
 
 table tr td {
     border: 1px solid black;
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     text-align: center;
     font-family: calibri;
     font-weight: bold;

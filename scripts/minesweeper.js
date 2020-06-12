@@ -32,7 +32,9 @@ var minesweeper = (function(){
                 if (td.attr('data-mark'))
                     return td.removeAttr('data-mark').toggleClass('markBomb');
 
-                return td.attr('data-mark', '1').toggleClass('markBomb');
+                td.attr('data-mark', '1').toggleClass('markBomb');
+                checkWinner();
+                return;
             }
 
             if (td.attr('data-mark'))
@@ -47,6 +49,8 @@ var minesweeper = (function(){
             if (field.isBomb) {
                 td.toggleClass('bomb');
                 $('#field tr td').off('mouseup');
+
+                setTimeout(function(){ alert("you lose"); }, 500);
                 return;
             }
 
@@ -59,6 +63,7 @@ var minesweeper = (function(){
             }
 
             td.html(field.number).addClass('color' + field.number);
+            checkWinner();
         });
     }
 
@@ -144,6 +149,14 @@ var minesweeper = (function(){
             around(+td.attr('x'), +td.attr('y')).forEach(function(x, i) { 
                 if (x) x.td.addClass('border' + i);
             });
+    }
+
+    checkWinner = () => {
+        var amountOpen = $('#field tr td[data-open]').length;
+        var amountMark = $('#field tr td[data-mark]').length;
+
+        if (amountOpen + amountMark == config.length * config.length)
+            setTimeout(function(){ alert("you win"); }, 500);
     }
 
     return {
