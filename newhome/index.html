@@ -6,54 +6,56 @@
     <title>Hi :)</title>
     <link rel="icon" type="imagem/png" href="controller.png" />
     <link rel="stylesheet" type="text/css" href="index.css">
+    <script src="../scripts/jquery-3.2.1.min.js"></script>
 </head>
 <body class="dark">
-    <div>
-        <nav>
-            <ul class="gameMenu darkLight">
-                <li>
-                    <div class="gameCard red">
-                        <div class="gameTitle">SNAKE</div>
-                        <div class="play">
-                            <img draggable="false" src="playred.png" alt="play">
-                        </div>
+    <nav>
+        <ul class="darkLight">
+            <li>
+                <div class="card red">
+                    <div class="title">SNAKE</div>
+                    <div class="play">
+                        <img onmousedown="changeImage(this, 'pressedRed.png')" onmouseup="changeImage(this, 'playRed.png')" draggable="false" src="playRed.png" alt="play">
                     </div>
-                </li>
-                <li>
-                    <div class="gameCard green">
-                        <div class="gameTitle">HASH</div>
-                        <div class="play">
-                            <img draggable="false" src="playgreen.png" alt="play">
-                        </div>
+                </div>
+            </li>
+            <li>
+                <div class="card green">
+                    <div class="title">HASH</div>
+                    <div class="play">
+                        <img onmousedown="changeImage(this, 'pressedGreen.png')" onmouseup="changeImage(this, 'playGreen.png')" draggable="false" src="playGreen.png" alt="play">
                     </div>
-                </li>
-                <li>
-                    <div class="gameCard purple">
-                        <div class="gameTitle">MINI SWEEPER</div>
-                        <div class="play">
-                            <img draggable="false" src="playpurple.png" alt="play">
-                        </div>
+                </div>
+            </li>
+            <li>
+                <div class="card purple">
+                    <div class="title">MINI<br>SWEEPER</div>
+                    <div class="play">
+                        <img onmousedown="changeImage(this, 'pressedPurple.png')" onmouseup="changeImage(this, 'playPurple.png')" draggable="false" src="playPurple.png" alt="play">
                     </div>
-                </li>
-                <li>
-                    <div class="gameCard blue">
-                        <div class="gameTitle">GENIUS</div>
-                        <div class="play">
-                            <img draggable="false" src="playblue.png" alt="play">
-                        </div>
+                </div>
+            </li>
+            <li>
+                <div class="card blue">
+                    <div class="title">GENIUS</div>
+                    <div class="play">
+                        <img onmousedown="changeImage(this, 'pressedBlue.png')" onmouseup="changeImage(this, 'playBlue.png')" draggable="false" src="playBlue.png" alt="play">
                     </div>
-                </li>
-                <li>
-                    <div class="gameCard orange">
-                        <div class="gameTitle">TETRIS</div>
-                        <div class="play">
-                            <img draggable="false" src="playorange.png" alt="play">
-                        </div>
+                </div>
+            </li>
+            <li>
+                <div class="card orange">
+                    <div class="title">TETRIS</div>
+                    <div class="play">
+                        <img onmousedown="changeImage(this, 'pressedOrange.png')" onmouseup="changeImage(this, 'playOrange.png')" draggable="false" src="playOrange.png" alt="play">
                     </div>
-                </li>
-            </ul>
-        </nav>
-        <div></div>
-    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    <section class="info darkLight"> 
+
+    </section>
 </body>
 </html>
+<script src="index.js"></script>

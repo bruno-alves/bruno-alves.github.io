@@ -1,3 +1,8 @@
+@font-face {
+    font-family: luckiestguy;
+    src: url(luckiestguy.ttf);
+}
+
 .dark {background-color: rgb(66, 66, 66);}
 .darkLight {background-color: rgb(80, 80, 80);}
 .red {background-color: rgb(255, 88, 88);}
@@ -6,46 +11,49 @@
 .blue {background-color: rgb(111, 111, 255);}
 .orange {background-color: rgb(255, 190, 71);}
 
-.gameMenu { 
+nav ul { 
     display: flex; 
     flex-wrap: wrap;
     list-style-type: none;
     padding: 0;
-    max-width: 600px;
-    min-width: 155px;
+    max-width: 520px;
     border-radius: 10px;
 }
 
-.gameMenu li {
-    min-width: 130px;
-    height: 150px;
+nav ul li {
+    min-width: 110px;
+    height: 115px;
     margin: 10px;
 }
 
-.gameMenu li div.gameCard {
-    height: 125px;
+img {
+    width: 65px;
+    cursor: pointer;
+    outline: none;
+}
+
+.card {
+    height: 95px;
     border-radius: 10px;
 }
 
-.gameMenu li div.gameTitle {
+.title {
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
     max-width: 130px;
-    height: 72px;
+    height: 55px;
     font-family: calibri;
     font-weight: bold;
-    font-size: 28px;
+    font-size: 20px;
 }
 
-.gameMenu li div.play {
+.play {
     display: flex;
     justify-content: center;
-    width: 100%;
 }
 
-.gameMenu li div img {
-    width: 80px;
-    cursor: pointer;
+section.info {
+    max-width: ;
 }
