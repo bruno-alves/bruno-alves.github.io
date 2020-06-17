@@ -9,53 +9,66 @@
     <script src="../scripts/jquery-3.2.1.min.js"></script>
 </head>
 <body class="dark">
-    <nav>
-        <ul class="darkLight">
-            <li>
-                <div class="card red">
-                    <div class="title">SNAKE</div>
-                    <div class="play">
-                        <img onmousedown="changeImage(this, 'pressedRed.png')" onmouseleave="changeImage(this, 'playRed.png')" onmouseup="changeImage(this, 'playRed.png')" draggable="false" src="playRed.png" alt="play">
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="card green">
-                    <div class="title">HASH</div>
-                    <div class="play">
-                        <img onmousedown="changeImage(this, 'pressedGreen.png')" onmouseleave="changeImage(this, 'playGreen.png')" onmouseup="changeImage(this, 'playGreen.png')" draggable="false" src="playGreen.png" alt="play">
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="card purple">
-                    <div class="title">MINI<br>SWEEPER</div>
-                    <div class="play">
-                        <img onmousedown="changeImage(this, 'pressedPurple.png')" onmouseleave="changeImage(this, 'playPurple.png')" onmouseup="changeImage(this, 'playPurple.png')" draggable="false" src="playPurple.png" alt="play">
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="card blue">
-                    <div class="title">GENIUS</div>
-                    <div class="play">
-                        <img onmousedown="changeImage(this, 'pressedBlue.png')" onmouseleave="changeImage(this, 'playBlue.png')" onmouseup="changeImage(this, 'playBlue.png')" draggable="false" src="playBlue.png" alt="play">
-                    </div>
-                </div>
-            </li>
-            <li>
-                <div class="card orange">
-                    <div class="title">TETRIS</div>
-                    <div class="play">
-                        <img onmousedown="changeImage(this, 'pressedOrange.png')" onmouseleave="changeImage(this, 'playOrange.png')" onmouseup="changeImage(this, 'playOrange.png')" draggable="false" src="playOrange.png" alt="play">
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </nav>
-    <section class="info darkLight"> 
-
-    </section>
+    <div class="content">
+        <div>
+            <div>
+                <nav>
+                    <ul class="darkLight">
+                        <li>
+                            <div class="gameCard red">
+                                <div class="gameTitle">SNAKE</div>
+                                <div class="buttonPlay">
+                                    <img draggable="false" src="playRed.png" alt="play">
+                                    <img style="display: none;" draggable="false" src="pressedRed.png" alt="play">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="gameCard green">
+                                <div class="gameTitle">HASH</div>
+                                <div class="buttonPlay">
+                                    <img draggable="false" src="playGreen.png" alt="play">
+                                    <img style="display: none;" draggable="false" src="pressedGreen.png" alt="play">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="gameCard purple">
+                                <div class="gameTitle">MINI<br>SWEEPER</div>
+                                <div class="buttonPlay">
+                                    <img draggable="false" src="playPurple.png" alt="play">
+                                    <img style="display: none;" draggable="false" src="pressedPurple.png" alt="play">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="gameCard blue">
+                                <div class="gameTitle">GENIUS</div>
+                                <div class="buttonPlay">
+                                    <img draggable="false" src="playBlue.png" alt="play">
+                                    <img style="display: none;" draggable="false" src="pressedBlue.png" alt="play">
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="gameCard orange">
+                                <div class="gameTitle">TETRIS</div>
+                                <div class="buttonPlay">
+                                    <img draggable="false" src="playOrange.png" alt="play">
+                                    <img style="display: none;" draggable="false" src="pressedOrange.png" alt="play">
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="gameInfo darkLight"></div>
+        </div>
+        <div class="gameArea darkLight">
+            <iframe src="../snake.html" frameborder="0"></iframe>
+        </div>
+    </div>
+    
 </body>
 </html>
 <script src="index.js"></script>
