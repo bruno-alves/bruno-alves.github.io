@@ -15,7 +15,7 @@ table tr td:not([data-open]):not([data-mark]) { background-image: linear-gradien
 table tr td:hover:not([data-open]):not([data-mark]) { background: #0000ffad; }
 
 .bomb {  
-    background-image: url("../images/bomb.jpg"); 
+    background-image: url("../assets/minisweeper/bomb.jpg"); 
     background-size: 45px 45px;
     background-repeat: no-repeat;
     background-color: transparent;
