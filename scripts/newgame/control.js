@@ -1,7 +1,8 @@
-let scenario, character, enemyDroplet, soundTrack
+let scenario, character, enemyDroplet, soundTrack, jumpingSound
 
 function preload() {
     soundTrack = loadSound('assets/newgame/sounds/soundtrack.mp3');
+    jumpingSound = loadSound('assets/newgame/sounds/jump.mp3');
 }
 
 function setup() {
@@ -9,15 +10,27 @@ function setup() {
     frameRate(45);
 
     scenario = new Scenario(loadImage('assets/newgame/images/forest.png'), 2);
-    character = new Character(loadImage('assets/newgame/images/character.png'));
-    enemyDroplet = new Enemy(loadImage('assets/newgame/images/droplet.png'))
-    //soundTrack.loop();
+    character = new Character(loadImage('assets/newgame/images/character.png'), 4, 4, 0, height - 135, 110, 135, 0, 0, 220, 270);
+    enemyDroplet = new Enemy(loadImage('assets/newgame/images/droplet.png'), 4, 7, width - 60, height - 60, 60, 60, 0, 0, 104, 104, 10);
+    soundTrack.loop();
+}
+
+function keyPressed() {
+    if (keyCode === 32) {
+        character.jump();
+        jumpingSound.play();
+    }
 }
   
 function draw() {
-    scenario.show();
-    scenario.move();
-
+    scenario.show();  
     character.show();
+    character.gravity();
+
     enemyDroplet.show();
+    enemyDroplet.move();
+
+    if (character.isCollidingWithEnemy(enemyDroplet)) {
+        noLoop();
+    }
 }
