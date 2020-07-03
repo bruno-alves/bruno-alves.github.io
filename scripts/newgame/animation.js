@@ -1,37 +1,33 @@
 class Animation {
-    constructor(image, amountColuns, amountRows, positionX, positionY, width, height, imagePositionX, imagePositionY, imageWidth, imageHeight) {
-        this.image = image;                         // Sprint, que contém todas as imagens a serem exibidas criando a animação          
-        this.amountColuns = amountColuns;           // Quantidade de colunas que a imagem possui
-        this.amountRows = amountRows;               // Quantidade de linhas que a imagem possui
-        this.positionX = positionX;                 // Posição no eixo X que a imagem será exibida na tela
-        this.positionY = positionY;                 // Posição no eixo Y que a imagem será exibida na tela
-        this.width = width;                         // Largura da imagem a ser exibida
-        this.height = height;                       // Altura da imagem a ser exibida
-        this.imagePositionX = imagePositionX;       // Posição no eixo X de onde será recortado a imagem de dentro do sprint
-        this.imagePositionY = imagePositionY;       // Posição no eixo Y de onde será recortado a imagem de dentro do sprint
-        this.imageWidth = imageWidth;               // Tamanho do recorte a partir da posição inicial - largura
-        this.imageHeight = imageHeight;             // Tamanho do recorte a partir da posição inicial - altura
-    }
+    constructor(image, x, y, size, numberFigures, numberColumns) {
+        this.image = image;                         // Sprint, que contém todas as imagens a serem exibidas criando a animação         
+        this.x = x;                                 // Posição no eixo X, que será exibido na tela
+        this.y = y;                                 // Posição no eixo Y, que será exibido na tela
+        this.size = size;                           // Objeto que contém os tamanhos da imagem
+        this.numberFigures = numberFigures;         // Quantidade de figuras que tem dentro do sprint
+        this.numberColumns = numberColumns;         // Quantidade de colunas que tem dentro do sprint
 
-    show() {
-        image(this.image, this.positionX, this.positionY, this.width, this.height, 
-              this.imagePositionX * this.imageWidth, this.imagePositionY * this.imageHeight, 
-              this.imageWidth, this.imageHeight);
-              
-        this.animate();
+        this.frame = 0;
+        this.positionWidth = 0;
+        this.positionHeight = 0;
     }
 
     animate() {
-        this.imagePositionX = this.imagePositionX + 1;
+        image(this.image, this.x, height - this.size.customHeight - this.y, this.size.customWidth, 
+            this.size.customHeight, this.positionWidth, this.positionHeight, this.size.width, this.size.height)
 
-        if (this.imagePositionX == this.amountColuns) {
-            this.imagePositionX = 0;
-            this.imagePositionY = this.imagePositionY + 1;
+        this.frame++;
+        this.positionWidth += this.size.width;
+
+        if (this.frame % this.numberColumns == 0) {
+            this.positionWidth = 0;
+            this.positionHeight += this.size.height;
         }
 
-        if (this.imagePositionY == this.amountRows) {
-            this.imagePositionX = 0;
-            this.imagePositionY = 0;
+        if (this.frame == this.numberFigures) {
+            this.positionWidth = 0;
+            this.positionHeight = 0;
+            this.frame = 0;
         }
     }
 }

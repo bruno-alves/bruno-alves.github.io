@@ -1,14 +1,14 @@
 class Enemy extends Animation {
-    constructor(image, amountColuns, amountRows, positionX, positionY, width, height, imagePositionX, imagePositionY, imageWidth, imageHeight, speed) {
-        super(image, amountColuns, amountRows, positionX, positionY, width, height, imagePositionX, imagePositionY, imageWidth, imageHeight);
+    constructor(image, x, y, size, numberFigures, numberColumns, speed) {
+        super(image, x, y, size, numberFigures, numberColumns);
 
         this.speed = speed;
     }
 
     move() {
-        this.positionX = this.positionX - this.speed;
+        this.x = this.x - this.speed;
 
-        if (this.positionX < -this.width)
-            this.positionX = width;
+        if (this.x <= -this.size.customWidth)
+            this.x = width;
     }
 }
