@@ -1,8 +1,10 @@
-let scenario, character, enemyDroplet, enemyTroll, soundTrack, jumpingSound
+let scenario, character, soundTrack, jumpingSound, gameOver;
+let enemies = [];
 
 function preload() {
     soundTrack = loadSound('assets/newgame/sounds/soundtrack.mp3');
     jumpingSound = loadSound('assets/newgame/sounds/jump.mp3');
+    gameOver = loadImage('assets/newgame/images/gameOver.png');
 }
 
 function setup() {
@@ -19,10 +21,11 @@ function setup() {
 
     scenario = new Scenario(loadImage('assets/newgame/images/forest.png'), 2);
     character = new Character(loadImage('assets/newgame/images/character.png'), 0, 0, size.character, 16, 4);
-    enemyDroplet = new Enemy(loadImage('assets/newgame/images/droplet.png'), width, -5, size.enemyDroplet, 28, 4, 10);
-    enemyTroll = new Enemy(loadImage('assets/newgame/images/troll.png'), width, -30, size.enemyTroll, 28, 5, 8);
-    enemyFlyingDroplet = new Enemy(loadImage('assets/newgame/images/flyingDroplet.png'), width, 200, size.enemyFlyingDroplet, 16, 3, 5);
+    score = new Score();
 
+    enemies.push(new Enemy(loadImage('assets/newgame/images/droplet.png'), width, -5, size.enemyDroplet, 28, 4, 3));
+    enemies.push(new Enemy(loadImage('assets/newgame/images/troll.png'), width, -30, size.enemyTroll, 28, 5, 3));
+    enemies.push(new Enemy(loadImage('assets/newgame/images/flyingDroplet.png'), width, 200, size.enemyFlyingDroplet, 16, 3, 3));
     //soundTrack.loop();
 }
 
@@ -39,16 +42,16 @@ function draw() {
     character.animate();
     character.gravity();
 
-    enemyDroplet.animate();
-    enemyDroplet.move();
+    score.show();
+    score.add();
 
-    enemyTroll.animate();
-    enemyTroll.move();
+    enemies.forEach(enemy => {
+        enemy.animate();
+        enemy.move();
 
-    enemyFlyingDroplet.animate();
-    enemyFlyingDroplet.move();
-
-  /*   if (character.isCollidingWithEnemy(enemyDroplet, 10)) {
-        //noLoop();
-    } */
+        if (character.isCollidingWithEnemy(enemy)) { 
+            noLoop();
+            image(gameOver, width / 2 - 200, height / 3);
+        }
+    })
 }
