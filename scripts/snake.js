@@ -4,7 +4,7 @@
     }, 10);
 
     var snake = new Array();
-    var speedSnake = 500;
+    var speedSnake = 1000;
     var direction = newDirection = 'D';
     var maxTr = 15;
 	var maxTd = 20; 
