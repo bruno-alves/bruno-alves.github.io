@@ -1,52 +1,51 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Choose your game!</title>
-        <link rel="stylesheet" href="styles/index.css">
-        <script src="scripts/jquery-3.2.1.min.js"> </script>
-    </head>
-    <body>
-        <div id="mainDiv" class="transform">
-            <div id="titleCard">
-                <label class="red">CHOOSE YOUR GAME!</label>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hi :)</title>
+
+    <link rel="stylesheet" type="text/css" href="styles/index.css">
+</head>
+<body class="dark">
+    <ul class="darkLight">
+        <li class="red">
+            <span>SNAKE</span>
+            <div>
+                <img unPressed src="assets/playRed.png" alt="play">
+                <img pressed game='snake' src="assets/pressedRed.png" alt="play">
             </div>
-            <div id="divGameCard">
-                <div class="gameCard backgroundGreen">
-                    <div class="divTitleGame">
-                        <label class="blue">SNAKE</label>
-                    </div>
-                    <div class="divPlayButton">
-                        <button name="snake" class="playButton blue backgroundLightGreen" onclick="redirect('snake.html')">PLAY!</button>
-                    </div>
-                </div>
-                <div class="gameCard backgroundYellow">
-                    <div class="divTitleGame">
-                        <label class="blue">HASH</label>
-                    </div>
-                    <div class="divPlayButton">
-                        <button name="hash" class="playButton blue backgroundLightYellow" onclick="redirect('hash.html')">PLAY!</button>
-                    </div>
-                </div>
-                <div class="gameCard backgroundOrange">
-                    <div class="divTitleGame">
-                        <label class="blue">MINISWEEPER</label>
-                    </div>
-                    <div class="divPlayButton">
-                        <button name="minifield" class="playButton blue backgroundLightOrange" onclick="redirect('minesweeper.html')">PLAY!</button>
-                    </div>
-                </div>
+        </li>
+        <li class="green">
+            <span>TIC TAC TOE</span>
+            <div>
+                <img unPressed src="assets/playGreen.png" alt="play">
+                <img pressed game='tictactoe' src="assets/pressedGreen.png" alt="play">
             </div>
-        </div>
-    </body>
+        </li>
+        <li class="purple">
+            <span>MINI SWEEPER</span>
+            <div>
+                <img unPressed src="assets/playPurple.png" alt="play">
+                <img pressed game='minesweeper' src="assets/pressedPurple.png" alt="play">
+            </div>
+        </li>
+        <li class="blue">
+            <span>GENIUS</span>
+            <div>
+                <img unPressed src="assets/playBlue.png" alt="play">
+                <img pressed game='genius' src="assets/pressedBlue.png" alt="play">
+            </div>
+        </li>
+        <li class="orange">
+            <span>TETRIS</span>
+            <div>
+                <img unPressed src="assets/playOrange.png" alt="play">
+                <img pressed game='tetris' src="assets/pressedOrange.png" alt="play">
+            </div>
+        </li>
+    </ul>
+</body>
 </html>
 
-<script>
-
-    redirect = url => { 
-        $('#mainDiv').toggleClass('transform-active');
-        setTimeout(function () { 
-            window.location.href = url; 
-        }, 1000);  
-    };
-
-</script>
+<script src="scripts/index.js"></script>
