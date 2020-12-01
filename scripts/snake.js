@@ -1,23 +1,56 @@
-(function() {
-    setTimeout(function(){
-        $('body').toggleClass('transform-active');
-    }, 10);
+(() => {
+    let snake = new Array();
+    let speed = 1000;
+    
+    let direction = { current: 'D', next: 'D' }
+    let field = { width: 30, height: 15 }
 
+    for (var h = 1; h <= field.height; h++) {
+        let tr = document.createElement('tr');
+
+        for (var w = 1; w <= field.width; w++)
+            tr.appendChild(document.createElement('td'));
+        
+        document.getElementsByTagName('table')[0].appendChild(tr);
+    }
+
+    let tds = document.getElementsByTagName('td');
+    tds[0].classList.add('tail');
+    tds[1].classList.add('body');
+    tds[2].classList.add('head');
+
+    createFood();
+    let timer = setInterval(move, speed);
+})();
+
+function move() {
+}
+
+function createFood() {
+    let tdsOpen = document.querySelectorAll('td:not(.tail):not(.body):not(.head)');
+    tdsOpen[Math.floor(Math.random() * (tdsOpen.length - 1))].classList.add('food');
+}
+
+/*
+
+(function() {
     var snake = new Array();
     var speedSnake = 1000;
     var direction = newDirection = 'D';
     var maxTr = 15;
-	var maxTd = 20; 
+	var maxTd = 30; 
     var time;
 
     //Montando tabela do jogo
-    for (var l = 1; l <= 15; l++){
-
+    for (var l = 1; l <= 15; l++) {
+        let tr = document.createElement('tr');
         var tds = [];
-        for (var c = 1; c <= 20; c++) 
-            tds.push($('<td>'));
 
-        $('#tableGame').append($('<tr>', {html: tds}))
+        for (var c = 1; c <= 30; c++) 
+            tds.push(document.createElement('td'));
+
+        tr.appendChild(tds);
+        document.appendChild(tr);
     }
 
     //Recupera todas as trs da tabela 
@@ -107,3 +140,5 @@
         }, speed);
     }
 })();
+
+*/
