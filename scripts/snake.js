@@ -1,144 +1,101 @@
-(() => {
-    let snake = new Array();
-    let speed = 1000;
+var snake = (_ => {
+    let _snake = new Array();
+    let _field;
+
+    let _speed = 200;
+    let _dimension = { width: 50, height: 20 };
+    let _direction = { current: 'D', next: 'D' };
     
-    let direction = { current: 'D', next: 'D' }
-    let field = { width: 30, height: 15 }
+    let _createField = () => {
+        for (let h = 1; h <= _dimension.height; h++) {
+            $('#snakeTable tbody').append('<tr></tr>');
 
-    for (var h = 1; h <= field.height; h++) {
-        let tr = document.createElement('tr');
+            for (let w = 1; w <= _dimension.width; w++)
+                $('#snakeTable tbody tr:last-child').append(`<td>${(h - 1) * 50 + w - 1}</td>`);
+        }
+    };
+   
+    let _initSnake = _ => {
+        _field = $('#snakeTable tbody tr td');
 
-        for (var w = 1; w <= field.width; w++)
-            tr.appendChild(document.createElement('td'));
+        _snake[0] = { position: 0, class: 'tail' };
+        _snake[1] = { position: 1, class: 'body' };
+        _snake[2] = { position: 2, class: 'head' };
+
+        $(_field[0]).addClass('tail');
+        $(_field[1]).addClass('body');
+        $(_field[2]).addClass('head');
+    };
+
+    let _addComands = _ => {
+        $('body').on('keydown', (event) => {
+            switch (event.keyCode) {
+                case 87: _direction.next = _direction.current == 'S' ? 'S' : 'W'; break;
+                case 68: _direction.next = _direction.current == 'A' ? 'A' : 'D'; break;
+                case 83: _direction.next = _direction.current == 'W' ? 'W' : 'S'; break;
+                case 65: _direction.next = _direction.current == 'D' ? 'D' : 'A'; break;
+                default: return;
+            }
+        });
+    };
+
+    let _move = _ => {
+        for (let s = 0; s < _snake.length; s++) {
+            if (_snake[s].class === 'head') {
+                switch (_direction.current = _direction.next) {
+                    case 'W': {
+                        let nexPosition = _snake[s].position - _dimension.width;
+                        _snake[s].position = nexPosition < 0 
+                            ? _dimension.width * (_dimension.height - 1) + _snake[s].position  
+                            : nexPosition; break;   
+                    }
+                    case 'D': {
+                        let nextPosition = _snake[s].position + 1;
+                        _snake[s].position = nextPosition % _dimension.width == 0 
+                            ? nextPosition - _dimension.width 
+                            : nextPosition; break;
+                    }
+                    case 'S': {
+                        let nextPosition = _snake[s].position + _dimension.width
+                        _snake[s].position = nextPosition >= _dimension.width * _dimension.height 
+                            ? _snake[s].position - _dimension.width * (_dimension.height - 1)
+                            : nextPosition; break;
+                    } 
+                    case 'A':{
+                        let nextPosition = _snake[s].position - 1;
+                        _snake[s].position = _snake[s].position % _dimension.width == 0 
+                            ? nextPosition + _dimension.width  
+                            : nextPosition; break;
+                    }
+                    default: return;
+                } 
+                return;
+            }
+
+            _snake[s].position = _snake[s + 1].position;
+        }
+    };
+
+    let _showSnake = () => {
+        setInterval(_ => {
+            _move();
         
-        document.getElementsByTagName('table')[0].appendChild(tr);
+            $(_field).removeClass();
+            _snake.forEach(snake => {
+                $(_field[snake.position]).addClass(snake.class);
+            });
+        }, _speed)
     }
 
-    let tds = document.getElementsByTagName('td');
-    tds[0].classList.add('tail');
-    tds[1].classList.add('body');
-    tds[2].classList.add('head');
+    return {
+        init: _ => {
+            _createField();
+            _initSnake();
 
-    createFood();
-    let timer = setInterval(move, speed);
-})();
-
-function move() {
-}
-
-function createFood() {
-    let tdsOpen = document.querySelectorAll('td:not(.tail):not(.body):not(.head)');
-    tdsOpen[Math.floor(Math.random() * (tdsOpen.length - 1))].classList.add('food');
-}
-
-/*
-
-(function() {
-    var snake = new Array();
-    var speedSnake = 1000;
-    var direction = newDirection = 'D';
-    var maxTr = 15;
-	var maxTd = 30; 
-    var time;
-
-    //Montando tabela do jogo
-    for (var l = 1; l <= 15; l++) {
-        let tr = document.createElement('tr');
-        var tds = [];
-
-        for (var c = 1; c <= 30; c++) 
-            tds.push(document.createElement('td'));
-
-        tr.appendChild(tds);
-        document.appendChild(tr);
-    }
-
-    //Recupera todas as trs da tabela 
-    var tableGameTr = $('#tableGame tr'); 
-
-    //Criando a Skake inicial e seu array
-    $(tableGameTr).eq(0).find('td').eq(0).addClass('tailSnake');
-    $(tableGameTr).eq(0).find('td').eq(1).addClass('bodySnake');
-    $(tableGameTr).eq(0).find('td').eq(2).addClass('headSnake right');
-
-    snake[0] = $(tableGameTr).eq(0).find('td').eq(2);
-    snake[1] = $(tableGameTr).eq(0).find('td').eq(1);
-    snake[2] = $(tableGameTr).eq(0).find('td').eq(0);
-
-    //Cria a comida da Snake
-     createFood();
-
-    //Atribuindo evento de keydown no body da pagina
-    $("body").keydown(function(e) {
-        switch(e.which){
-            case 87: if (direction != 'S' ) newDirection = 'W'; break;
-            case 65: if (direction != 'D' ) newDirection = 'A'; break;
-            case 83: if (direction != 'W' ) newDirection = 'S'; break;
-            case 68: if (direction != 'A' ) newDirection = 'D'; break;
+            _showSnake();
+            _addComands();
         }
-    });
-
-    //Movimentação da Skake
-    function movement(){   
-        //Movimentando o corpo
-        $(snake[0]).removeClass('headSnake right bottom top left').addClass('bodySnake');
-        $(snake[snake.length -2]).removeClass('bodySnake').addClass('tailSnake');
-        $(snake[snake.length -1]).removeClass('tailSnake');
-
-        //Movimentando a head
-        switch(direction = newDirection) {
-            case 'W':
-                var trUp = $(snake[0]).parent().index() == 0 ? $(tableGameTr).eq(maxTr -1) : $(snake[0]).parent().prev();
-                $(trUp).find('td').eq(snake[0].index()).addClass('headSnake top'); 
-                break;
-            case 'A': 
-                $(snake[0]).index() == 0 ? $(snake[0]).parent().find('td').eq(maxTd -1).addClass('headSnake left') : $(snake[0]).prev().addClass('headSnake left');
-                break;
-            case 'S':
-                var trBelow = $(snake[0]).parent().index() == (maxTr -1) ? $(tableGameTr).eq(0) : $(snake[0]).parent().next();
-                $(trBelow).find('td').eq(snake[0].index()).addClass('headSnake bottom'); 
-                break;
-            case 'D':
-                $(snake[0]).index() == maxTd - 1 ? $(snake[0]).parent().find('td').eq(0).addClass('headSnake right') : $(snake[0]).next().addClass('headSnake right');
-                break;
-        }
-
-        //Verificando se colidiu com o corpo da Snake
-        if ($('.headSnake').hasClass('bodySnake') || $('.headSnake').hasClass('tailSnake')){
-            clearInterval(time);
-            $('.headSnake').removeClass('bodySnake, headSnake').addClass('gameOver');
-        }
-        
-       //Redefinindo o array da Snake após movimentação
-       for (var x = snake.length -1; x >= 1; x--)
-           snake[x] = x == snake.length -1 ? $('.tailSnake') : $(snake[x -1]);   
-
-        snake[0] = $('.headSnake');    
-
-        //Verifica colisão com a comida da Snake
-        if ($('.headSnake').hasClass('food')) {
-            $('.headSnake').removeClass('food');
-            snake.push('<td>');
-            clearInterval(time);
-            createFood();
-            timer(speedSnake == 150 ? 150 : speedSnake -= 25);
-        }
-    }
-
-    //Inicia o timer da movimentação
-    timer(speedSnake);
-
-    function createFood() {
-        var tdOpen = $('td:not(".headSnake, .bodySnake, .tailSnake")');
-        $(tdOpen[Math.floor((Math.random() * (tdOpen.length -1)))]).addClass('food');
-    }
-
-    //Time de movimentação da Snake
-    function timer(speed) {
-        time = setInterval(function() {
-            movement();
-        }, speed);
     }
 })();
 
-*/
+( _ => { snake.init(); } )();
