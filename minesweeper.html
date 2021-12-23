@@ -1,23 +1,22 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Minesweeper</title>
-        <link rel="stylesheet" href="styles/minesweeper.css">
-        <script src="scripts/jquery-3.2.1.min.js"></script>
-    </head>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minesweeper</title>
 
-    <body class="transform">
-        <div id="container">
-            <table id="field" oncontextmenu="return false;"></table>
-        </div>
-    </body>
+    <link rel="stylesheet" type="text/css" href="styles/global.css">
+    <link rel="stylesheet" href="styles/minesweeper.css">
+    <script src="scripts/jquery-3.2.1.min.js"></script>
+    <script src="scripts/minesweeper.js"></script>
+</head>
+<body class="dark">
+    <div id="container">
+        <table id="field" oncontextmenu="return false;"></table>
+    </div>
+</body>
 </html>
-<script src="scripts/minesweeper.js"></script>
 <script>
-
-    minesweeper.init({
-        length: 15,
-        percentBombs: 20
-    });
-
+    minesweeper.init({length: 15, percentBombs: 20});
 </script>

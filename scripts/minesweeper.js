@@ -1,8 +1,4 @@
 var minesweeper = (function(){
-    setTimeout(function(){
-        $('body').toggleClass('transform-active');
-    }, 10);
-
     var config = {
         field: [],          // Matriz que representa o campo do jogo
         length: '',         // Tamanho do campo do jogo (Exemplo: 15x15)
