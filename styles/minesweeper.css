@@ -6,7 +6,7 @@ table tr td:hover:not([data-open]):not([data-mark]) { background: rgb(60, 60, 60
 
 .bomb {  
     background-image: url("../assets/minisweeper/bomb.jpg"); 
-    background-size: 47px 47px;
+    background-size: 37px 37px;
     background-repeat: no-repeat;
     background-color: transparent;
 }
@@ -14,12 +14,12 @@ table tr td:hover:not([data-open]):not([data-mark]) { background: rgb(60, 60, 60
 table tr td {
     border: 1px solid black;
     background-color: white;
-    width: 45px;
-    height: 45px;
+    width: 35px;
+    height: 35px;
     text-align: center;
     font-family: calibri;
     font-weight: bold;
-    font-size: 25px;
+    font-size: 20px;
     user-select: none;  
 }
 
