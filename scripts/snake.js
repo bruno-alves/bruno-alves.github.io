@@ -2,8 +2,8 @@ var snake = (_ => {
     let _snake = new Array();
     let _field;
 
-    let _speed = 200;
-    let _dimension = { width: 50, height: 20 };
+    let _speed = 300;
+    let _dimension = { width: 40, height: 20 };
     let _direction = { current: 'D', next: 'D' };
     
     let _createField = () => {
@@ -11,7 +11,7 @@ var snake = (_ => {
             $('#snakeTable tbody').append('<tr></tr>');
 
             for (let w = 1; w <= _dimension.width; w++)
-                $('#snakeTable tbody tr:last-child').append(`<td>${(h - 1) * 50 + w - 1}</td>`);
+                $('#snakeTable tbody tr:last-child').append(`<td></td>`);
         }
     };
    
@@ -79,18 +79,40 @@ var snake = (_ => {
     let _showSnake = () => {
         setInterval(_ => {
             _move();
+            
         
-            $(_field).removeClass();
+            $(_field).removeClass('head body tail');
             _snake.forEach(snake => {
                 $(_field[snake.position]).addClass(snake.class);
             });
+
+            _checkFoodCollision();
         }, _speed)
+    }
+
+    let _createFood = () => {
+        let min = 0;
+        let max = $('#snakeTable tbody tr td:not(.tail, .head, .body)').length - 1;
+        let random = Math.floor(Math.random() * (max - min + 1) + min);
+
+        $($('#snakeTable tbody tr td:not(.tail, .head, .body)')[random]).addClass('food');
+    }
+
+    let _checkFoodCollision = () => {
+        if ($(".head").hasClass('food')) {
+            $(".head").removeClass('food');
+            _createFood();
+
+            _snake[0].class = 'body';
+            _snake.unshift({ position: _snake[0].position, class: 'tail' });
+        }
     }
 
     return {
         init: _ => {
             _createField();
             _initSnake();
+            _createFood();
 
             _showSnake();
             _addComands();

@@ -1,6 +1,6 @@
 .darkLight {background-color: rgb(80, 80, 80);}
 .head { background-color:rgb(226, 24, 215) }
-.body { background-color: rgb(11, 113, 210); }
+.body { background-color: rgb(255, 80, 80); }
 .tail { background-color: rgb(249, 177, 47); }
 .gameOver { background-color: black; }
 .food { animation: food linear infinite 0.5s; }
