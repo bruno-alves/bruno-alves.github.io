@@ -77,9 +77,8 @@ var snake = (_ => {
     };
 
     let _showSnake = () => {
-        setInterval(_ => {
+        setTimeout(_ => {
             _move();
-            
         
             $(_field).removeClass('head body tail');
             _snake.forEach(snake => {
@@ -105,7 +104,10 @@ var snake = (_ => {
 
             _snake[0].class = 'body';
             _snake.unshift({ position: _snake[0].position, class: 'tail' });
+            _speed = _speed == 60 ? _speed : _speed - 30;
         }
+
+        _showSnake();
     }
 
     return {
