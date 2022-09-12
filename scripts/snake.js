@@ -85,7 +85,7 @@ var snake = (_ => {
                 $(_field[snake.position]).addClass(snake.class);
             });
 
-            _checkFoodCollision();
+            _checkCollision();
         }, _speed)
     }
 
@@ -97,7 +97,7 @@ var snake = (_ => {
         $($('#snakeTable tbody tr td:not(.tail, .head, .body)')[random]).addClass('food');
     }
 
-    let _checkFoodCollision = () => {
+    let _checkCollision = () => {
         if ($(".head").hasClass('food')) {
             $(".head").removeClass('food');
             _createFood();
@@ -105,6 +105,13 @@ var snake = (_ => {
             _snake[0].class = 'body';
             _snake.unshift({ position: _snake[0].position, class: 'tail' });
             _speed = _speed == 60 ? _speed : _speed - 30;
+        }
+
+        if ($(".head").hasClass('body') || $(".head").hasClass('tail')) {
+            $(".head").addClass('gameOver');
+            $(".head").removeClass('head');
+            alert('You died!')
+            return;
         }
 
         _showSnake();
