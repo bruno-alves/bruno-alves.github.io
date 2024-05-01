@@ -1,5 +1,4 @@
 html, body {height: 100%; margin: 0}
-table { border-collapse: collapse; }
 table tr td:not([data-open]) { cursor: pointer; }
 table tr td:not([data-open]):not([data-mark]) { background: rgb(100, 100, 100); }
 table tr td:hover:not([data-open]):not([data-mark]) { background: rgb(60, 60, 60); }
