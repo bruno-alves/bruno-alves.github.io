@@ -12,27 +12,7 @@ var minesweeper = (function(){
             help(td, event.ctrlKey); 
     });
 
-    var secretWord = [81, 87, 69, 82, 84, 89];
-    var currentWord = 0;
-
-    $(document).keyup((e) => {
-        if (e.which == secretWord[currentWord]) {
-            currentWord++
-        }
-        else {
-            currentWord = 0;
-        }
-
-        if (currentWord == secretWord.length){ 
-            for (var x = 0; x < config.length; x++) { 
-                for (var y = 0; y < config.length; y++) { 
-                    if (config.field[x][y].isBomb) {
-                        config.field[x][y].td.attr('data-mark', '1').toggleClass('markBombAnim');
-                    }
-                }
-            }
-        }
-    })
+    
  
     var init = $config => {
         config = $config;
