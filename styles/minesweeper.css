@@ -31,6 +31,7 @@ table tr td {
 }
 
 .markBomb { background-color: #F44336; }
+.markBombAnim { animation: bombAnim forwards 1.5s; }
 .color1 { color: green; }
 .color2 { color: orange; }
 .color3 { color: blue; }
@@ -48,3 +49,10 @@ table tr td {
 .border5 { box-shadow: black inset -3px -3px 0px 0px; }
 .border6 { box-shadow: black inset -3px 3px 0px 0px; }
 .border7 { box-shadow: black inset 3px -3px 0px 0px; }
+
+@keyframes bombAnim {
+    0% { transform: scale(0.2); background-color: #ff7575; }
+    30% { transform: scale(1); background-color: #F44336; }
+    60% { transform: scale(0.2); background-color: #ff7575; }
+    100% { transform: scale(1); background-color: #F44336; }
+}
