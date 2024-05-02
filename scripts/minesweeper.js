@@ -11,8 +11,6 @@ var minesweeper = (function(){
         if (td.length)
             help(td, event.ctrlKey); 
     });
-
-    
  
     var init = $config => {
         config = $config;
@@ -149,10 +147,18 @@ var minesweeper = (function(){
     }
 
     checkWinner = () => {
-        var amountOpen = $('#field tr td[data-open]').length;
-        var amountMark = $('#field tr td[data-mark]').length;
+        var amountBombsMarked = 0;
 
-        if (amountOpen + amountMark == config.length * config.length)
+        for (var x = 0; x < config.length; x++) {
+            for (var y = 0; y < config.length; y++) { 
+                if (config.field[x][y].isBomb && config.field[x][y].td.attr('data-mark'))
+                    amountBombsMarked++
+            };
+        };
+
+        var amountOpen = $('#field tr td[data-open]').length;
+
+        if (amountOpen + amountBombsMarked == config.length * config.length)
             setTimeout(function(){ alert("you win"); }, 500);
     }
 
