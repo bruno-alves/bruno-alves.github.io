@@ -202,6 +202,10 @@ var minesweeper = (function(){
                     $("#btnNo").hide();
                     $("#btnYes").hide();
                     $(".text14").show();
+                    
+                    setTimeout(function() {
+                        window.open("https://store.finalfantasyxiv.com/ffxivstore/en-us/product/6");
+                    }, 3000);
                 });
             }, 76000);
         };
