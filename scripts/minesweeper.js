@@ -12,27 +12,27 @@ var minesweeper = (function(){
             help(td, event.ctrlKey); 
     });
 
-    // var secretWord = [81, 87, 69, 82, 84, 89];
-    // var currentWord = 0;
+    var secretWord = [81, 87, 69, 82, 84, 89];
+    var currentWord = 0;
 
-    // $(document).keyup((e) => {
-    //     if (e.which == secretWord[currentWord]) {
-    //         currentWord++
-    //     }
-    //     else {
-    //         currentWord = 0;
-    //     }
+    $(document).keyup((e) => {
+        if (e.which == secretWord[currentWord]) {
+            currentWord++
+        }
+        else {
+            currentWord = 0;
+        }
 
-    //     if (currentWord == secretWord.length){ 
-    //         for (var x = 0; x < config.length; x++) { 
-    //             for (var y = 0; y < config.length; y++) { 
-    //                 if (config.field[x][y].isBomb) {
-    //                     config.field[x][y].td.attr('data-mark', '1').toggleClass('markBombAnim');
-    //                 }
-    //             }
-    //         }
-    //     }
-    // })
+        if (currentWord == secretWord.length){ 
+            for (var x = 0; x < config.length; x++) { 
+                for (var y = 0; y < config.length; y++) { 
+                    if (config.field[x][y].isBomb) {
+                        config.field[x][y].td.attr('data-mark', '1').toggleClass('markBombAnim');
+                    }
+                }
+            }
+        }
+    })
  
     var init = $config => {
         config = $config;
@@ -168,15 +168,6 @@ var minesweeper = (function(){
             });
     }
 
-    /* Script feito para NASNYE */
-    changeButtonPosition = () => {
-        var top = 0 + Math.floor(Math.random() * 345);
-        var left = 0 + Math.floor(Math.random() * 900);
-    
-        $('#btnNo').css('margin-left', '');
-        $('#btnNo').animate({ top: top, left: left }, 150);
-    };
-
     checkWinner = () => {
         var amountBombsMarked = 0;
 
@@ -188,26 +179,8 @@ var minesweeper = (function(){
         };
 
         var amountOpen = $('#field tr td[data-open]').length;
-
         if (amountOpen + amountBombsMarked == config.length * config.length) {
-            /* Script feito para NASNYE */
-            $('.divSurprise').show();  
-
-            setTimeout(function() {
-                $('#btnNo').on('mouseenter', function() {
-                    changeButtonPosition();
-                });
-
-                $('#btnYes').on('click', function() {
-                    $("#btnNo").hide();
-                    $("#btnYes").hide();
-                    $(".text14").show();
-                    
-                    setTimeout(function() {
-                        window.open("https://store.finalfantasyxiv.com/ffxivstore/en-us/product/6");
-                    }, 3000);
-                });
-            }, 76000);
+            alert('you win!');
         };
     };
 
